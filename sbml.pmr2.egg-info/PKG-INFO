@@ -1,0 +1,25 @@
+Metadata-Version: 1.0
+Name: sbml.pmr2
+Version: trunk
+Summary: SBML plugin for PMR2
+Home-page: http://svn.plone.org/svn/collective/
+Author: Tommy Yu
+Author-email: tommy.yu@auckland.ac.nz
+License: GPL
+Description: Introduction
+        ============
+        
+        
+        
+        This product may contain traces of nuts.
+        
+        Changelog
+        =========
+        
+        trunkdev (unreleased)
+        ---------------------
+        
+        - Initial release
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python

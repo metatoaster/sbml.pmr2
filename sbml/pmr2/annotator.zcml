@@ -1,0 +1,36 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="pmr2">
+
+  <!-- Note storage -->
+
+  <adapter
+      for="pmr2.app.exposure.interfaces.IExposureFile"
+      factory=".SBMLNoteFactory"
+      provides="pmr2.app.annotation.interfaces.IRawTextNote"
+      name="sbml_note"
+      />
+
+  <adapter
+      for="pmr2.app.exposure.interfaces.IExposureFile"
+      factory=".SBMLSpeciesNoteFactory"
+      provides=".interfaces.ISBMLSpeciesNote"
+      name="sbml_species"
+      />
+
+  <!-- Note Generation -->
+
+  <utility
+      name="sbml_note"
+      component=".annotator.SBMLNoteAnnotatorFactory"
+      provides="pmr2.app.annotation.interfaces.IExposureFileAnnotator"
+      />
+
+  <utility
+      name="sbml_species"
+      component=".annotator.SBMLSpeciesAnnotatorFactory"
+      provides="pmr2.app.annotation.interfaces.IExposureFileAnnotator"
+      />
+
+</configure>

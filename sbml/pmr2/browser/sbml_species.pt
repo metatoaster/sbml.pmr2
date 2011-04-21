@@ -1,0 +1,18 @@
+<h1>Species</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Compartment</th>
+      <th>Initial concentration</th>
+      <th>Boundary condition</th>
+  </thead>
+  <tbody>
+    <tr tal:repeat="i view/species">
+      <td><a tal:attributes="href i/id" tal:content="i/name"></a></td>
+      <td tal:content="i/compartment"></td>
+      <td tal:content="i/initialConcentration"></td>
+      <td tal:content="i/boundaryCondition"></td>
+    </tr>
+  </tbody>
+</table>

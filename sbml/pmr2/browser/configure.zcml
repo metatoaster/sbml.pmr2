@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="pmr2">
+
+  <!-- Browser pages -->
+
+  <browser:page
+      for="pmr2.app.exposure.interfaces.IExposureFile"
+      name="sbml_note"
+      class=".view.SBMLNoteView"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      for="pmr2.app.exposure.interfaces.IExposureFile"
+      name="sbml_species"
+      class=".view.SBMLSpeciesView"
+      permission="zope2.View"
+      />
+
+</configure>

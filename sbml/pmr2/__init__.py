@@ -5,3 +5,4 @@ from note import *
 
 SBMLNoteFactory = factory(RawTextNote, 'sbml_note')
 SBMLSpeciesNoteFactory = factory(SBMLSpeciesNote, 'sbml_species')
+SBMLReactionsNoteFactory = factory(SBMLReactionsNote, 'sbml_reactions')

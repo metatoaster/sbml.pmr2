@@ -25,9 +25,9 @@ import libsbml
 
 from sbml.pmr2.interfaces import *
 
-#XSLT_SOURCE = join(dirname(__file__), 'xslt')
-#xsltpath = lambda x: join(XSLT_SOURCE, x)
-#mathmlc2p_xslt = etree.parse(xsltpath('mathmlc2p.xsl'))
+XSLT_SOURCE = join(dirname(__file__), 'xslt')
+xsltpath = lambda x: join(XSLT_SOURCE, x)
+mathmlc2p_xslt = etree.parse(xsltpath('mathmlc2p.xsl'))
 
 
 class SBMLNoteAnnotator(ExposureFileAnnotatorBase):
@@ -86,12 +86,12 @@ class SBMLSpeciesAnnotator(ExposureFileAnnotatorBase):
 SBMLSpeciesAnnotatorFactory = named_factory(SBMLSpeciesAnnotator)
 
 
-class SBMLReactionAnnotator(ExposureFileAnnotatorBase):
+class SBMLReactionsAnnotator(ExposureFileAnnotatorBase):
     zope.interface.implements(IExposureFileAnnotator)
     title = u'SBML Reactions'
     label = u'Reactions'
     description = u''
-    for_interface = IRawTextNote # XXX fix
+    for_interface = ISBMLReactionsNote
 
     def generate(self):
         def mathc2p(s):
@@ -99,11 +99,30 @@ class SBMLReactionAnnotator(ExposureFileAnnotatorBase):
             t = etree.parse(StringIO(s))
             t.xslt(mathmlc2p_xslt).write(r)
             return r.getvalue()
-        maths = self.maths()
-        maths = [(k, [mathc2p(m) for m in v]) for k, v in maths]
+
+        reader = libsbml.SBMLReader()
+        doc = reader.readSBMLFromString(self.input)
+        model = doc.getModel()
+        reactions = model.getListOfReactions()
+        result = []
+
+        for i in reactions:
+            name = i.getName()
+            reactants = [model.getSpecies(j.getSpecies()).getName()
+                    for j in i.getListOfReactants()]
+            reversible = i.getReversible()
+            products = [model.getSpecies(j.getSpecies()).getName()
+                    for j in i.getListOfProducts()]
+            modifiers = [model.getSpecies(j.getSpecies()).getName()
+                    for j in i.getListOfModifiers()]
+            rawmath = libsbml.writeMathMLToString(i.getKineticLaw().getMath())
+            math = mathc2p(rawmath)
+            part = (name, reactants, reversible, products, modifiers, math)
+            result.append(part)
+
         return (
-            ('maths', maths),
+            ('reactions', result),
         )
 
-SBMLReactionAnnotatorFactory = named_factory(SBMLReactionAnnotator)
+SBMLReactionsAnnotatorFactory = named_factory(SBMLReactionsAnnotator)
 

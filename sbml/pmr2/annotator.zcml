@@ -19,6 +19,13 @@
       name="sbml_species"
       />
 
+  <adapter
+      for="pmr2.app.exposure.interfaces.IExposureFile"
+      factory=".SBMLReactionsNoteFactory"
+      provides=".interfaces.ISBMLReactionsNote"
+      name="sbml_reactions"
+      />
+
   <!-- Note Generation -->
 
   <utility
@@ -30,6 +37,12 @@
   <utility
       name="sbml_species"
       component=".annotator.SBMLSpeciesAnnotatorFactory"
+      provides="pmr2.app.annotation.interfaces.IExposureFileAnnotator"
+      />
+
+  <utility
+      name="sbml_reactions"
+      component=".annotator.SBMLReactionsAnnotatorFactory"
       provides="pmr2.app.annotation.interfaces.IExposureFileAnnotator"
       />
 

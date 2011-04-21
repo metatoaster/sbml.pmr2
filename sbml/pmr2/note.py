@@ -14,3 +14,10 @@ class SBMLSpeciesNote(ExposureFileNoteBase):
     zope.interface.implements(ISBMLSpeciesNote)
 
     species = fieldproperty.FieldProperty(ISBMLSpeciesNote['species'])
+
+
+class SBMLReactionsNote(ExposureFileNoteBase):
+
+    zope.interface.implements(ISBMLReactionsNote)
+
+    reactions = fieldproperty.FieldProperty(ISBMLReactionsNote['reactions'])

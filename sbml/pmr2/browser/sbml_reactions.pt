@@ -1,0 +1,17 @@
+<h1>Species</h1>
+<ul>
+  <tal:loop tal:repeat="i view/reactions">
+    <li>
+      <h6 tal:content="i/name"></h6>
+      <div>
+        <span tal:content="i/reactants"></span>
+        <span tal:content="i/reversible"></span>
+        <span tal:content="i/products"></span> ;
+        <span tal:content="i/modifiers"></span>
+      </div>
+      <div>
+        <div tal:replace="structure i/math"></div>
+      </div>
+    </li>
+  </tal:loop>
+</ul>

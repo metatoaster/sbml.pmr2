@@ -13,3 +13,21 @@ class ISBMLSpeciesNote(zope.interface.Interface):
         default=[],
         required=False,
     )
+
+
+class ISBMLReaction(zope.interface.Interface):
+    # XXX implement this later.
+    pass
+
+
+class ISBMLReactionsNote(zope.interface.Interface):
+    """\
+    SBML Reactions
+    """
+
+    reactions = zope.schema.List(
+        title=u'Reactions',
+        description=u'List of Reactions',
+        default=[],
+        required=False,
+    )

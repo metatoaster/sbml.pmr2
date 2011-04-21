@@ -19,4 +19,11 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      for="pmr2.app.exposure.interfaces.IExposureFile"
+      name="sbml_reactions"
+      class=".view.SBMLReactionsView"
+      permission="zope2.View"
+      />
+
 </configure>

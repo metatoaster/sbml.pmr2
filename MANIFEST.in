@@ -2,3 +2,5 @@ recursive-include sbml *
 recursive-include docs *
 global-exclude *pyc
 global-exclude .*swp
+include *txt
+include *rst

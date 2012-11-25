@@ -1,5 +1,5 @@
 <h1>Species</h1>
-<ul>
+<ul id="mathjax-render">
   <tal:loop tal:repeat="i view/reactions">
     <li>
       <h6 tal:content="i/name"></h6>
@@ -9,9 +9,12 @@
         <span tal:content="i/products"></span> ;
         <span tal:content="i/modifiers"></span>
       </div>
-      <div>
-        <div tal:replace="structure i/math"></div>
-      </div>
+      <dl class="collapsible">
+        <dt class="collapsibleHeader">Maths</dt>
+        <dd class="collapsibleContent">
+          <div class="eq" tal:content="structure i/math"></div>
+        </dd>
+      </dl>
     </li>
   </tal:loop>
 </ul>

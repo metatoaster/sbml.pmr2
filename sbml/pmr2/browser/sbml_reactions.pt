@@ -1,4 +1,29 @@
 <h1>Species</h1>
+
+  <script type="text/javascript">
+  //<![CDATA[
+    function process() {
+      var components = jq('#mathjax-render > *');
+      for (var i = 0; i < components.length; i++) {
+        var component = jq(components[i]); //.clone();
+        var equations = component.find('math > mrow');
+        for (var j = 0; j < equations.length; j++) {
+          var math = jq('<' + 'div class="eq"><' + '/div>').append(
+                        jq('<' + 'math>' + '<' + '/math>').append(
+                           equations[j]));
+          component.append(math);
+        }
+      }
+    }
+
+    jq(document).ready(function() {
+      process();
+      loadMathJax();
+    })
+
+  //]]>
+  </script>
+
 <ul id="mathjax-render">
   <tal:loop tal:repeat="i view/reactions">
     <li>
@@ -9,12 +34,7 @@
         <span tal:content="i/products"></span> ;
         <span tal:content="i/modifiers"></span>
       </div>
-      <dl class="collapsible">
-        <dt class="collapsibleHeader">Maths</dt>
-        <dd class="collapsibleContent">
-          <div class="eq" tal:content="structure i/math"></div>
-        </dd>
-      </dl>
+      <div class="eq" tal:content="structure i/math"></div>
     </li>
   </tal:loop>
 </ul>

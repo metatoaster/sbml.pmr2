@@ -5,24 +5,21 @@ from plone.z3cform import layout
 
 from plone.memoize.view import memoize
 
-from pmr2.app.interfaces import IExposureSourceAdapter
-from pmr2.app.browser.layout import PlainLayoutWrapper
-from pmr2.annotation.mathjax.layout import MathJaxLayoutWrapper
+from pmr2.app.exposure.interfaces import IExposureSourceAdapter
 
 from pmr2.app.exposure.browser.browser import ExposureFileViewBase
+from pmr2.annotation.mathjax.browser import DeferredMathJaxNote
 
 
-class SBMLNote(ExposureFileViewBase):
+class SBMLNoteView(ExposureFileViewBase):
     """\
     SBML note.
     """
 
     template = ViewPageTemplateFile('sbml_note.pt')
 
-SBMLNoteView = layout.wrap_form(SBMLNote, __wrapper_class=PlainLayoutWrapper)
 
-
-class SBMLSpecies(ExposureFileViewBase):
+class SBMLSpeciesView(ExposureFileViewBase):
     """\
     SBML species.
     """
@@ -42,11 +39,8 @@ class SBMLSpecies(ExposureFileViewBase):
             )))
         return result
 
-SBMLSpeciesView = layout.wrap_form(SBMLSpecies,
-    __wrapper_class=PlainLayoutWrapper)
 
-
-class SBMLReactions(ExposureFileViewBase):
+class SBMLReactionsView(DeferredMathJaxNote):
     """\
     SBML reactions.
     """
@@ -71,6 +65,3 @@ class SBMLReactions(ExposureFileViewBase):
                 math,
             ))))
         return result
-
-SBMLReactionsView = layout.wrap_form(SBMLReactions,
-    __wrapper_class=MathJaxLayoutWrapper)

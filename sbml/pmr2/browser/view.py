@@ -1,5 +1,5 @@
 import zope.component
-from zope.app.pagetemplate.viewpagetemplatefile import ViewPageTemplateFile
+from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 from paste.httpexceptions import HTTPNotFound
 from plone.z3cform import layout
 
